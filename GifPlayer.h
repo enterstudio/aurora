@@ -208,6 +208,8 @@ private:
         if (len != 4) {
             Serial.println("Bad graphic control extension");
         }
+#else
+        readByte();
 #endif
 
         int packedBits = readByte();

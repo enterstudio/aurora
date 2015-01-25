@@ -117,7 +117,7 @@ void setup()
     // Setup serial interface
     Serial.begin(115200);
     Serial1.begin(115200);
-    cmd.setInput(&Serial1);
+    cmd.setInput(&Serial1, &Serial);
 
     //delay(3000);
     //Serial.println(F("starting..."));

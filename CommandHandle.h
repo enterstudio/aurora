@@ -32,7 +32,9 @@ class CommandHandle {
     unsigned int zeroDelay = 120;
 
 public:
-    CommandHandle(Stream* stream) : stream_(stream) { }
+
+
+    void setInput(Stream* stream) { stream_ = stream; }
 
     bool isHolding() { return isHolding_; }
     void heldButtonHasBeenHandled() {

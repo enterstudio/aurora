@@ -50,7 +50,7 @@ SmartMatrix matrix;
 
 #include "CommandHandle.h"
 
-CommandHandle cmd(&Serial1);
+CommandHandle cmd;
 
 #include "Effects.h"
 Effects effects;
@@ -117,6 +117,7 @@ void setup()
     // Setup serial interface
     Serial.begin(115200);
     Serial1.begin(115200);
+    cmd.setInput(&Serial1);
 
     //delay(3000);
     //Serial.println(F("starting..."));

@@ -96,7 +96,7 @@ public:
             while (true) {
                 updateForeground(menuItems, menuItemsCount);
 
-                InputCommand command = readCommand(defaultHoldDelay);
+                InputCommand command = cmd.readCommand();
 
                 if (command == InputCommand::Up) {
                     if (visible) {
@@ -173,9 +173,9 @@ public:
                     }
                 }
                 else if (command == InputCommand::Brightness) {
-                    bool wasHolding = isHolding;
-                    if (isHolding || cycleBrightness() == 0) {
-                        heldButtonHasBeenHandled();
+                    bool wasHolding = cmd.isHolding();
+                    if (cmd.isHolding() || cycleBrightness() == 0) {
+                        cmd.heldButtonHasBeenHandled();
                         powerOff();
                         previousIndex = -1;
                         if (currentMenuItem->drawable)
@@ -222,7 +222,7 @@ public:
                 }
                 else if (command == InputCommand::Clock) { // toggle clock visibility, cycle through messages
                     if (!visible) {
-                        if (isHolding) {
+                        if (cmd.isHolding()) {
                             // turn off the clock or message if the button is held
                             messageVisible = false;
                             clockVisible = false;

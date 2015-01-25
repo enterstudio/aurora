@@ -33,7 +33,6 @@ uint8_t backgroundBrightnessMap[brightnessCount] = { 8, 16, 32, 64, 128 };
 
 #include <SmartMatrix_32x32.h>
 #include <FastLED.h>
-#include <IRremote.h>
 #include <SPI.h>
 #include <SD.h>
 
@@ -46,11 +45,12 @@ const int MATRIX_CENTER_Y = MATRIX_HEIGHT / 2;
 
 bool sdAvailable = false;
 SmartMatrix matrix;
-IRrecv irReceiver(IR_RECV_PIN);
 
 #include "aJSON.h"
 
-#include "IrCodes.h"
+#include "CommandHandle.h"
+
+CommandHandle cmd(&Serial1);
 
 #include "Effects.h"
 Effects effects;
@@ -115,13 +115,14 @@ bool enableStartupSplash = false;
 void setup()
 {
     // Setup serial interface
-    Serial.begin(9600);
+    Serial.begin(115200);
+    Serial1.begin(115200);
 
     //delay(3000);
     //Serial.println(F("starting..."));
 
     // Initialize the IR receiver
-    irReceiver.enableIRIn();
+    //irReceiver.enableIRIn();
 
     // Initialize 32x32 LED Matrix
     matrix.begin();
@@ -188,7 +189,7 @@ void powerOff()
     matrix.displayForegroundDrawing(false);
 
     while (true) {
-        InputCommand command = readCommand();
+        InputCommand command = cmd.readCommand();
         if (command == InputCommand::Power ||
             command == InputCommand::Brightness)
             return;

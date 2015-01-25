@@ -69,7 +69,7 @@ public:
             matrix.drawString(4, 11, { 255, 255, 255 }, text);
             matrix.swapBuffers();
 
-            InputCommand command = readCommand(defaultHoldDelay);
+            InputCommand command = cmd.readCommand();
             
             switch (command) {
                 case InputCommand::Up:

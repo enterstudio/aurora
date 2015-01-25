@@ -39,7 +39,7 @@ public:
             matrix.swapBuffers();
             matrix.displayForegroundDrawing(false);
 
-            InputCommand command = readCommand(defaultHoldDelay);
+            InputCommand command = cmd.readCommand();
 
             switch (command) {
                 case InputCommand::Up:
